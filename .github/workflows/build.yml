@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  packages: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup env
+        run: |
+          sudo apt install python2
+          sudo ln -sf /usr/bin/bash /usr/bin/sh
+          sudo ln -sf /usr/bin/python2 /usr/bin/python
+
+      - name: Build
+        run: bash ./build.sh
+        env:
+          MAKEJOBS: "-j5"
+
+      - name: Release
+        run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes
+        working-directory: kernel/build_result
