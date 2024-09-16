@@ -19,7 +19,6 @@ jobs:
         with:
           path: |
             ./
-            /var/cache/apt/
           key: env-cache-${{ github.sha }}
           restore-keys: env-cache-
 
@@ -47,5 +46,4 @@ jobs:
         with:
           path: |
             ./
-            /var/cache/apt/
           key: env-cache-${{ github.sha }}
