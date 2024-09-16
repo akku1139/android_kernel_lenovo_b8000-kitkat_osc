@@ -7,4 +7,4 @@ export KCFLAGS="-pipe -mtune=cortex-a7 -march=armv7-a -mfpu=neon-vfpv4"
 export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 
 cd kernel
-bash -e build.sh lenovo89_tb_x10_jb2
+bash -ex build.sh lenovo89_tb_x10_jb2
