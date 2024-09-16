@@ -151,7 +151,8 @@ else
 fi
 
 # update configuration
-nice make ${makeflags} ${makedefs} silentoldconfig
+#nice make ${makeflags} ${makedefs} silentoldconfig
+nice make ${makeflags} ${makedefs} oldconfig
 
 if [ ! -z $KMOD_PATH ]; then
   echo "Build kernel module PROJECT=$MTK_PROJECT PATH=$KMOD_PATH";
