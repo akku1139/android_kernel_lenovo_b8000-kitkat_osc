@@ -13,6 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Full cache (restore)
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ./
+            /var/cache/apt/
+          key: env-cache-${{ github.sha }}
+          restore-keys: env-cache-
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -30,3 +40,12 @@ jobs:
       - name: Release
         run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes
         working-directory: kernel/build_result
+
+      - name: Deps cache (save)
+        if: ${{ !cancelled() }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ./
+            /var/cache/apt/
+          key: env-cache-${{ github.sha }}
