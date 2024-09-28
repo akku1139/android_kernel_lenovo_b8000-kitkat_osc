@@ -192,23 +192,3 @@ else
 fi
 
 copy_to_legacy_download_flash_folder   kernel_${MTK_PROJECT}.bin rootfs_${MTK_PROJECT}.bin
-
-echo "**** Copying kernel to /build_result/kernel/ ****"
-mkdir -p ./build_result/kernel/
-cp kernelFile ./build_result/kernel/boot.img-kernel
-
-echo "**** Copying all built modules (.ko) to /build_result/modules/ ****"
-mkdir -p ./build_result/modules/
-for file in $(find ./ -name *.ko); do
- cp $file ./build_result/modules/
-done
-
-echo "**** Patching all built modules (.ko) in /build_result/modules/ ****"
-find ./build_result/modules/ -type f -name '*.ko' | xargs -n 1 $TOOLCHAIN/arm-cortex_a7-linux-gnueabihf-strip --strip-unneeded
-echo "**** Finnish ****"
-
-#echo "**** You can find kernelFile in root folder: /build_result/kernel/ ****"
-echo "**** You can find zImage in root folder: /build_result/kernel/ ****"
-echo "**** You can find all modules in root folder: /build_result/modules/ ****"
-#echo "**** Rename the kernelFile to zImage and repack with stock RamDisk ****"
-echo "**** Now grab the zImage and repack with stock RamDisk ****"
