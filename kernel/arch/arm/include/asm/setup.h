@@ -15,7 +15,7 @@
 #define __ASMARM_SETUP_H
 
 #include <linux/types.h>
-#include <mach/dfo_boot.h>
+//#include <mach/dfo_boot.h>
 #include <mach/mt_devinfo.h>
 
 #define COMMAND_LINE_SIZE 1024
@@ -199,7 +199,7 @@ struct tag {
                 struct tag_boot         boot;
                 struct tag_meta_com     meta_com;
                 struct tag_devinfo_data devinfo_data;
-                tag_dfo_boot     dfo_data;
+                //tag_dfo_boot     dfo_data;
                 struct tag_mdinfo_data mdinfo_data;
                 struct tag_ddr_dfs_info_data dfs_data;
 	} u;
