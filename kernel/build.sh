@@ -12,7 +12,7 @@ curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
 fi
-mkdir -p $outdir
+mkdir -p $curdir/out
 
 usage() {
     echo "Usage: $0 {release|rebuild|clean|silent|verbose|single} [config-xxx]"
