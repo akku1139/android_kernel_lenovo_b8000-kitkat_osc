@@ -20,6 +20,10 @@ usage() {
     exit 1
 }
 
+make() {
+    /usr/bin/make HOSTCC="ccache gcc" HOSTCXX="ccache g++" $@
+}
+
 make_clean() {
     echo "**** Cleaning ****"
     nice make ${makeflags} ${makedefs} distclean
