@@ -11,8 +11,8 @@ makejobs=${MAKEJOBS}
 curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
-  mkdir -p $outdir
 fi
+mkdir -p $outdir
 
 usage() {
     echo "Usage: $0 {release|rebuild|clean|silent|verbose|single} [config-xxx]"
