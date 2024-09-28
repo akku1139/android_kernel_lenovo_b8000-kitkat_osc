@@ -19,26 +19,43 @@ jobs:
         with:
           path: |
             ./
+            /dev/shm/ccache
           key: env-cache-${{ github.sha }}
           restore-keys: env-cache-
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup env
         run: |
-          sudo apt install python2
           sudo ln -sf /usr/bin/bash /usr/bin/sh
-          sudo ln -sf /usr/bin/python2 /usr/bin/python
+          echo `pwd`/toolchain/Python-2.7.18 >> $GITHUB_PATH
+          mkdir -p /dev/shm/ccache
+          sudo apt install ccache
+          ccache -M 5G
+          ccache -z
 
       - name: Build
         run: bash ./build.sh
         env:
-          MAKEJOBS: "-j5"
+          MAKEJOBS: '-j6'
 
       - name: Release
-        run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes
-        working-directory: kernel/build_result
+        run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" build_result.tar.gz
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Ccache statistics
+        if: ${{ !cancelled() }}
+        run: ccache -sv
+
+      - name: Clean Repository
+        if: ${{ !cancelled() }}
+        run: |
+          git clean -ffdx
+          git reset --hard HEAD
 
       - name: Env cache (save)
         if: ${{ !cancelled() }}
@@ -46,4 +63,5 @@ jobs:
         with:
           path: |
             ./
+            /dev/shm/ccache
           key: env-cache-${{ github.sha }}
