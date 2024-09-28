@@ -700,9 +700,9 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 		break;
 
 	default:
-#ifdef CONFIG_MTK_SCHED_TRACERS
-        trace_unnamed_irq(ipinr);
-#endif
+//#ifdef CONFIG_MTK_SCHED_TRACERS
+//        trace_unnamed_irq(ipinr);
+//#endif
         mt_trace_ISR_start(ipinr);
 		printk(KERN_CRIT "CPU%u: Unknown IPI message 0x%x\n",
 		       cpu, ipinr);

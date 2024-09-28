@@ -314,9 +314,9 @@ int generic_handle_irq(unsigned int irq)
 	struct irq_desc *desc = irq_to_desc(irq);
 
 	if (!desc){
-#ifdef CONFIG_MTK_SCHED_TRACERS
-        trace_unnamed_irq(irq);
-#endif
+//#ifdef CONFIG_MTK_SCHED_TRACERS
+//        trace_unnamed_irq(irq);
+//#endif
 		return -EINVAL;
     }
 	generic_handle_irq_desc(irq, desc);
