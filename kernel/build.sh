@@ -101,9 +101,9 @@ if [ "${rebuild}" == "y" ]; then make_clean; fi
 echo "**** Configuring / $defcfg / ****"
 # select correct configuration file
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
-  make mediatek-configs O=$outdir
+  yes "" | make mediatek-configs O=$outdir
 else
-  make mediatek-configs
+  yes "" | make mediatek-configs
 fi
 
 # Config DRAM size according to central Project Configuration file setting
